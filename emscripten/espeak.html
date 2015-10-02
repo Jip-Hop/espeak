@@ -174,7 +174,7 @@ function speak(preach) {
         <button type="button" id="preachit" onmousedown="speak(true);">Preach it</button>
         <button type="button" onmousedown="stop();">Shut up</button>
       </div>
-      <a id="gh" href="https://github.com/eeejay/espeak/tree/emscripten">GitHub Branch</a>
+      <a id="gh" href="https://github.com/jip-hop/espeak/tree/emscripten">GitHub Branch</a>
     </form>
       <script type="text/javascript">
        espeak = new Espeak('js/espeak.worker.js', function cb() {
@@ -215,5 +215,16 @@ function speak(preach) {
         }
         xhr.send();
 });</script>
+    <script type="text/javascript">
+    window.addEventListener("touchend", ios_unlock_sound, false);
+    function ios_unlock_sound(event) {
+        var buffer = ctx.createBuffer(1, 1, 22050);
+        var source = ctx.createBufferSource();
+        source.buffer = buffer;
+        source.connect(ctx.destination);
+        source.noteOn(0);
+        window.removeEventListener("touchend", ios_unlock_sound, false);
+    }
+    </script>
   </body>
 </html>
